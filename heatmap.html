@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Circles</title>
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        margin-left: 120px;
+        margin-top: 50px;
+        height: 80%;
+        width: 80%;
+      }
+
+      .header {
+        text-align: center;
+        font-size: 4em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <span>Ten Highest Murder Rates in the US</span>
+
+    </div>
+    <div id="map"></div>
+    <script>
+
+      var citymap = {
+        stLouis: {
+          center: {lat: 38.627003, lng: -90.199404},
+          murderRate: 49.89
+        },
+        neworleans: {
+          center: {lat: 29.951066, lng: -90.071532},
+          murderRate: 40.71
+        },
+        baltimore: {
+          center: {lat: 39.290385, lng: -76.612189},
+          murderRate: 33.91
+        },
+        halifaxCounty: {
+          center: {lat: 36.328486, lng: -77.589420},
+          murderRate: 26.02
+        },
+        jackson: {
+          center: {lat: 32.298757, lng: -90.184810},
+          murderRate: 25.57
+        },
+        richmond: {
+          center: {lat: 37.540725, lng: -77.436048},
+          murderRate: 19.43
+        },
+        nashCounty: {
+          center: {lat: 35.959795, lng: -77.973865},
+          murderRate: 18.91
+        },
+        detroit: {
+          center: {lat: 42.331427, lng: -83.045754},
+          murderRate: 17.76
+        },
+        pineBluff: {
+          center: {lat: 34.228431, lng: -92.003196},
+          murderRate: 17.41
+        },
+        washingtonDC: {
+          center: {lat: 38.907192, lng: -77.036871},
+          murderRate: 16.57
+        }
+      };
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 4,
+          center: {lat: 37.090, lng: -95.712},
+          mapTypeId: google.maps.MapTypeId.TERRAIN
+        });
+
+
+        for (var city in citymap) {
+          var cityCircle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: citymap[city].center,
+            radius: Math.sqrt(citymap[city].murderRate) * 10000
+          });
+        }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD3A279_qlNGRPaG2sAOVfzSU5BcLFJDcQ&callback=initMap">
+    </script>
+  </body>
+</html>
